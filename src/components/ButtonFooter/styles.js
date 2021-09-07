@@ -7,9 +7,15 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  text: {
+  textIsPressed: {
     color: theme.colors.blue,
     fontFamily: theme.fonts.semiBold,
     fontSize: 13,
+  },
+
+  textNormal: {
+    color: theme.colors.gray,
+    fontFamily:theme.fonts.semiBold,
+    fontSize: 13
   }
-})
+});

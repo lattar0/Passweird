@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { ButtonFooter } from '../../components/ButtonFooter';
 import { Footer } from '../../components/Footer';
 import { Header } from '../../components/Header';
 import { styles } from './styles';
