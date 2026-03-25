@@ -14,7 +14,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.lattaro.passweird.R
 import com.lattaro.passweird.presentation.list.components.PasswordItem
@@ -40,7 +42,10 @@ fun PasswordListScreen(
                 .padding(innerPadding)
                 .padding(16.dp)
         ) {
-            Text("Teste")
+            Text(
+                text = "Boa noite",
+                fontWeight = FontWeight.Bold,
+                fontSize = 32.sp)
 
             LazyColumn {
                 items(passwords) { password ->

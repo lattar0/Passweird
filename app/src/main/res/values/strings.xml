@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Passweird</string>
+    <string name="description">Descrição</string>
+    <string name="user">Usuário</string>
+    <string name="password">Senha</string>
+    <string name="url">URL</string>
+    <string name="create_password">Criar senha</string>
+    <string name="save_password">Salvar senha</string>
+    <string name="back">Voltar</string>
 </resources>

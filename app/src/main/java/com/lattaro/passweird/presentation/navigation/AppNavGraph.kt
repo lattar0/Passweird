@@ -1,5 +1,7 @@
 package com.lattaro.passweird.presentation.navigation
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,7 +13,14 @@ import com.lattaro.passweird.presentation.list.PasswordListScreen
 fun AppNavGraph() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Routes.DASHBOARD) {
+    NavHost(
+        navController = navController,
+        startDestination = Routes.DASHBOARD,
+        enterTransition = { EnterTransition.None },
+        exitTransition = { ExitTransition.None },
+        popEnterTransition = { EnterTransition.None },
+        popExitTransition = { ExitTransition.None }
+    ) {
         composable(Routes.DASHBOARD) { PasswordListScreen(
             onNavigateToPasswordForm = { navController.navigate(Routes.PASSWORD_FORM) }
         ) }
