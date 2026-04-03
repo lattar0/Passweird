@@ -4,36 +4,44 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lattaro.passweird.domain.model.Password
 import com.lattaro.passweird.domain.usecase.InsertPasswordUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class PasswordFormViewModel @Inject constructor(
     private val insertPasswordUseCase: InsertPasswordUseCase
 ) : ViewModel() {
-    private val _description = MutableStateFlow("")
-    val description: StateFlow<String> = _description
+    private val _state = MutableStateFlow(PasswordFormState())
+    val state: StateFlow<PasswordFormState> = _state
 
-    private val _user = MutableStateFlow("")
-    val user: StateFlow<String> = _user
-
-    private val _password = MutableStateFlow("")
-    val password: StateFlow<String> = _password
-
-    fun onPasswordInputChange(newValue: String) {
-        _password.value = newValue
+    fun onDescriptionChange(description: String) {
+        _state.value = _state.value.copy(description = description)
     }
 
-    fun onUserInputChange(newValue: String) {
-        _user.value = newValue
+    fun onUsernameChange(username: String) {
+        _state.value = _state.value.copy(username = username)
     }
 
-    fun onDescriptionInputChange(newValue: String) {
-        _description.value = newValue
+    fun onPasswordChange(password: String) {
+        _state.value = _state.value.copy(password = password)
     }
 
-    fun createPassword(password: Password) {
+    fun onUrlChange(url: String) {
+        _state.value = _state.value.copy(url = url)
+    }
+
+    fun onSavePassword() {
+        val currentState = _state.value
+        val password = Password(
+            description = currentState.description,
+            username = currentState.username,
+            password = currentState.password,
+            url = currentState.url
+        )
+
         viewModelScope.launch {
             insertPasswordUseCase(password)
         }

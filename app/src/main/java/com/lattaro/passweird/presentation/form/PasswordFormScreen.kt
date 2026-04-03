@@ -12,7 +12,6 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -28,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.lattaro.passweird.R
 import com.lattaro.passweird.presentation.form.components.PasswordInput
 import com.lattaro.passweird.ui.theme.PassweirdTheme
@@ -35,8 +35,11 @@ import com.lattaro.passweird.ui.theme.PassweirdTheme
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun PasswordFormScreen(
+    viewModel: PasswordFormViewModel = hiltViewModel(),
     onNavigateToPasswordList: () -> Unit,
 ) {
+    val state by viewModel.state.collectAsState()
+
     Scaffold(
         topBar =
             {
@@ -84,23 +87,31 @@ fun PasswordFormScreen(
                 .fillMaxWidth()
         ) {
             PasswordInput(
-                stringResource(R.string.description)
+                stringResource(R.string.description),
+                value = state.description,
+                onValueChange = { viewModel.onDescriptionChange(it) }
             )
 
             PasswordInput(
-                stringResource(R.string.user)
+                stringResource(R.string.user),
+                value = state.username,
+                onValueChange = { viewModel.onUsernameChange(it) }
             )
 
             PasswordInput(
-                stringResource(R.string.password)
+                stringResource(R.string.password),
+                value = state.password,
+                onValueChange = { viewModel.onPasswordChange(it) }
             )
 
             PasswordInput(
-                stringResource(R.string.url)
+                stringResource(R.string.url),
+                value = state.url,
+                onValueChange = { viewModel.onUrlChange(it) }
             )
 
             Button(
-                onClick = {},
+                onClick = { viewModel.onSavePassword()},
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(0.dp, 12.dp)
